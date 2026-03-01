@@ -1,0 +1,28 @@
+name: Playwright Sum Tables
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          npm init -y
+          npm i -D playwright
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: 24f2007515@ds.study.iitm.ac.in - compute table totals
+        run: node scripts/sumTables.js
